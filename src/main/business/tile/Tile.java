@@ -7,11 +7,10 @@ package main.business.tile;
  */
 abstract public class Tile {
 
-    Tile topTile = null;
-    Tile rightTile = null;
-    Tile bottomTile = null;
-    Tile leftTile = null;
-    boolean placed;
+    private Tile topTile = null;
+    private Tile rightTile = null;
+    private Tile bottomTile = null;
+    private Tile leftTile = null;
 
     public Tile getBottomTile() {
         return bottomTile;
