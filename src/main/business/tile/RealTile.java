@@ -67,4 +67,24 @@ public class RealTile extends Tile{
         }
     }
 
+    public ContentType getTopEdgeType(){
+
+        return contents.get(1).getType();
+    }
+
+    public ContentType getRightEdgeType(){
+
+        return contents.get(5).getType();
+    }
+
+    public ContentType getBottomEdgeType(){
+
+        return contents.get(7).getType();
+    }
+
+    public ContentType getLeftEdgeType(){
+
+        return contents.get(3).getType();
+    }
+
 }
