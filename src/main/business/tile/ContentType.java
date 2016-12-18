@@ -5,5 +5,9 @@ package main.business.tile;
  */
 public enum ContentType {
 
-    
+    ROAD,
+    CITY,
+    FARM,
+    MONASTARY,
+    INTERSECTION
 }
