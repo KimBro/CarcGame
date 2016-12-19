@@ -1,8 +1,7 @@
 package main.business.tile;
 
-import java.lang.reflect.Array;
+import main.business.Location;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Kevin on 12/17/16.
@@ -25,7 +24,9 @@ public class RealTile extends Tile{
         this.contents = contents;
     }
 
-    private void makePlaced(){
+    public void setLocation(Location location){
+
+        super.setLocation(location);
         placed = true;
     }
 

@@ -1,6 +1,7 @@
 package main.business.tile;
 
 
+import main.business.Location;
 
 /**
  * Created by Kevin on 12/17/16.
@@ -11,6 +12,7 @@ abstract public class Tile {
     private Tile rightTile = null;
     private Tile bottomTile = null;
     private Tile leftTile = null;
+    private Location location = null;
 
     public Tile getBottomTile() {
         return bottomTile;
@@ -44,5 +46,11 @@ abstract public class Tile {
         this.topTile = topTile;
     }
 
+    public void setLocation(Location location){
+        this.location = location;
+    }
 
+    public Location getLocation() {
+        return location;
+    }
 }
