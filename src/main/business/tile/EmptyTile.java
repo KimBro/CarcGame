@@ -7,6 +7,11 @@ import main.business.Location;
  */
 public class EmptyTile extends Tile{
 
+    ContentType topEdge = null;
+    ContentType rightEdge = null;
+    ContentType bottomEdge = null;
+    ContentType leftEdge = null;
+
     public EmptyTile(Location location){
 
         setLocation(location);
@@ -14,20 +19,29 @@ public class EmptyTile extends Tile{
 
     // TO DO
     // Add edge comparison when setting neighbor tile
-    public void setBottomTile(Tile bottomTile) {
-        super.setBottomTile(bottomTile);
-    }
 
-    public void setLeftTile(Tile leftTile) {
-        super.setLeftTile(leftTile);
-    }
-
-    public void setRightTile(Tile rightTile) {
-        super.setRightTile(rightTile);
-    }
-
-    public void setTopTile(Tile topTile) {
+    // set edges for tile placement check
+    public void setTopTile(RealTile topTile) {
         super.setTopTile(topTile);
+        topEdge = topTile.getBottomEdgeType();
     }
 
+    public void setRightTile(RealTile rightTile) {
+        super.setRightTile(rightTile);
+        rightEdge = rightTile.getLeftEdgeType();
+    }
+
+    public void setBottomTile(RealTile bottomTile) {
+        super.setBottomTile(bottomTile);
+        bottomEdge = bottomTile.getTopEdgeType();
+    }
+
+    public void setLeftTile(RealTile leftTile) {
+        super.setLeftTile(leftTile);
+        leftEdge = leftTile.getRightEdgeType();
+    }
+
+    public boolean isReal(){
+        return false;
+    }
 }
