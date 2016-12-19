@@ -12,6 +12,7 @@ abstract public class Tile {
     private Tile rightTile = null;
     private Tile bottomTile = null;
     private Tile leftTile = null;
+
     private Location location = null;
 
     public Tile getBottomTile() {
@@ -53,4 +54,6 @@ abstract public class Tile {
     public Location getLocation() {
         return location;
     }
+
+    abstract public boolean isReal();
 }

@@ -88,4 +88,8 @@ public class RealTile extends Tile{
         return contents.get(3).getType();
     }
 
+    public boolean isReal(){
+        return true;
+    }
+
 }
