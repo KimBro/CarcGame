@@ -16,7 +16,7 @@ public class Board {
     private List<EmptyTile> availableSpots;
 
     // Constructor
-    // Board is initialized a starting tile at 0,0
+    // Board is initialized with starting tile at 0,0
     Board(RealTile startTile){
 
         xTileLocation = new HashMap<>();
@@ -58,13 +58,17 @@ public class Board {
         // SET GROUPS
     }
 
+    // Set neighbor tiles for placed RealTile
+    //
     // Tells tiles that they are adjacent to one another
     // Creates new empty tiles if needed
     private void setNeighborTiles(RealTile tile){
 
+        // get location of tile
         int xLoc = tile.getLocation().getX();
         int yLoc = tile.getLocation().getY();
 
+        // get adjacent tiles
         Tile topTile = getTileAtLocation(xLoc, (yLoc + 1));
         Tile rightTile = getTileAtLocation((xLoc + 1), yLoc);
         Tile bottomTile = getTileAtLocation(xLoc, (yLoc - 1));
@@ -75,7 +79,9 @@ public class Board {
 
             topTile = new EmptyTile(new Location(xLoc, (yLoc + 1)));
             EmptyTile newSpot = (EmptyTile)topTile;
+
             addAvailableSpot(newSpot);
+            setNeighborTiles(newSpot);
         }
 
         // set as neighbors
@@ -83,11 +89,13 @@ public class Board {
         tile.setTopTile(topTile);
 
         // RIGHT TILE
-        if(rightTile == null){
+        if(rightTile == null){ // create EmptyTile neighbor if needed
 
             rightTile = new EmptyTile(new Location((xLoc + 1), yLoc));
             EmptyTile newSpot = (EmptyTile)rightTile;
+
             addAvailableSpot(newSpot);
+            setNeighborTiles(newSpot);
         }
 
         // set as neighbors
@@ -95,11 +103,13 @@ public class Board {
         tile.setRightTile(rightTile);
 
         // BOTTOM TILE
-        if(bottomTile == null){
+        if(bottomTile == null){ // create EmptyTile neighbor if needed
 
             bottomTile = new EmptyTile(new Location(xLoc, (yLoc - 1)));
             EmptyTile newSpot = (EmptyTile)bottomTile;
+
             addAvailableSpot(newSpot);
+            setNeighborTiles(newSpot);
         }
 
         // set as neighbors
@@ -107,11 +117,13 @@ public class Board {
         tile.setBottomTile(bottomTile);
 
         // LEFT TILE
-        if(leftTile == null){
+        if(leftTile == null){ // create EmptyTile neighbor if needed
 
             leftTile = new EmptyTile(new Location((xLoc - 1), yLoc));
             EmptyTile newSpot = (EmptyTile)leftTile;
+
             addAvailableSpot(newSpot);
+            setNeighborTiles(newSpot);
         }
 
         // set as neighbors
@@ -119,9 +131,56 @@ public class Board {
         tile.setLeftTile(leftTile);
     }
 
+    // set neighbor tiles for created EmptyTile
+    private void setNeighborTiles(EmptyTile emptyTile){
+
+        // get location of emptyTile
+        int xLoc = emptyTile.getLocation().getX();
+        int yLoc = emptyTile.getLocation().getY();
+
+        // get adjacent tiles
+        Tile topTile = getTileAtLocation(xLoc, (yLoc + 1));
+        Tile rightTile = getTileAtLocation((xLoc + 1), yLoc);
+        Tile bottomTile = getTileAtLocation(xLoc, (yLoc - 1));
+        Tile leftTile = getTileAtLocation((xLoc - 1), yLoc);
+
+        // Set neighbors
+        // TOP TILE
+        if(topTile != null && topTile.isReal()){ // only set neighbor if it is RealTile
+
+            // set as neighbors
+            topTile.setBottomTile(emptyTile);
+            emptyTile.setTopTile(topTile);
+        }
+
+        // RIGHT TILE
+        if(rightTile != null && rightTile.isReal()){ // only set neighbor if it is RealTile
+
+            // set as neighbors
+            rightTile.setLeftTile(emptyTile);
+            emptyTile.setRightTile(rightTile);
+        }
+
+        // BOTTOM TILE
+        if(bottomTile != null && bottomTile.isReal()){ // only set neighbor if it is RealTile
+
+            // set as neighbors
+            bottomTile.setTopTile(emptyTile);
+            emptyTile.setBottomTile(bottomTile);
+        }
+
+        // LEFT TILE
+        if(leftTile != null && leftTile.isReal()){ // only set neighbor if it is RealTile
+
+            // set as neighbors
+            leftTile.setRightTile(emptyTile);
+            emptyTile.setLeftTile(leftTile);
+        }
+    }
+
+    // add empty tile to available location
     public void addAvailableSpot(EmptyTile newSpot){
-
-
+        availableSpots.add(newSpot);
     }
 
     public void rotateTileAtLocation(Tile tile){
