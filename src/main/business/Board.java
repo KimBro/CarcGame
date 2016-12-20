@@ -26,7 +26,7 @@ public class Board {
     }
 
     // Place tile at location
-    public void placeTile(RealTile tile, Location location){
+    public boolean placeTile(RealTile tile, Location location){
 
         HashMap<Integer, Tile> yTileLocation;
         int xLoc = location.getX();
@@ -42,10 +42,14 @@ public class Board {
             yTileLocation = new HashMap<>();
         }
 
-        // TO DO
-        // CHECK TO MAKE SURE LOCATION IS EMPTY TILE
-        // AND
-        // REMOVE EMPTY TILE ONCE REPLACED
+        // check to make sure location is emptyTile, if not, error, return false
+        Tile emptyTile = yTileLocation.get(yLoc);
+        if(!emptyTile.isReal()){
+            return false;
+        }
+
+        // remove emptyTile from available spots
+        availableSpots.remove(emptyTile);
 
         // put tile at location
         yTileLocation.put(yLoc, tile);
@@ -56,6 +60,8 @@ public class Board {
 
         // TO DO
         // SET GROUPS
+
+        return true;
     }
 
     // Set neighbor tiles for placed RealTile
